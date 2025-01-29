@@ -35,7 +35,7 @@ const FileUploader = () => {
                />
             </label>
             <button
-               className="bg-blue-500 w-full p-2 text-lg font-semibold hover:bg-blue-600 transition duration-500  disabled:bg-blue-500 disabled:cursor-not-allowed"
+               className="bg-blue-500 w-full p-2 text-lg text-white font-semibold hover:bg-blue-600 transition duration-500  disabled:bg-blue-500 disabled:cursor-not-allowed"
                disabled={!selectedFile}
                onClick={handleSubmit}
             >
