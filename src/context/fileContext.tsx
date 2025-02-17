@@ -3,7 +3,8 @@ import { uploadFileRequest } from "../api/fileApi";
 
 interface FileUploadContextType {
    uploadFile: (file: File) => void;
-   uploadedData: string | null;
+   outputData: string | null;
+   originalData: string | null;
    error: string | null;
    uploadedFiles: string[];
    isLoading: boolean;
@@ -14,7 +15,8 @@ const FileUploadContext = createContext<FileUploadContextType | undefined>(
 );
 
 export const FileUploadProvider = ({ children }: { children: ReactNode }) => {
-   const [uploadedData, setUploadedData] = useState<string | null>(null);
+   const [outputData, setOutputData] = useState<string | null>(null);
+   const [originalData, setOriginalData] = useState<string | null>(null);
    const [error, setError] = useState<string | null>(null);
    const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
    const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,9 +30,11 @@ export const FileUploadProvider = ({ children }: { children: ReactNode }) => {
          setUploadedFiles((prevFiles) => [...prevFiles, fileName]);
          if (!response.successful) {
             setError(response.error.message);
-            setUploadedData(null);
+            setOutputData(null);
+            setOriginalData(null);
          } else {
-            setUploadedData(response.data.text);
+            setOutputData(response.data.text);
+            setOriginalData(response.data.originalText);
             setError(null);
          }
       } catch (err: unknown) {
@@ -40,7 +44,7 @@ export const FileUploadProvider = ({ children }: { children: ReactNode }) => {
             console.error("Unknown error:", err);
          }
          setError("File upload failed");
-         setUploadedData(null);
+         setOutputData(null);
       } finally {
          setIsLoading(false);
       }
@@ -48,7 +52,14 @@ export const FileUploadProvider = ({ children }: { children: ReactNode }) => {
 
    return (
       <FileUploadContext.Provider
-         value={{ uploadFile, uploadedData, error, uploadedFiles, isLoading }}
+         value={{
+            uploadFile,
+            outputData,
+            error,
+            uploadedFiles,
+            isLoading,
+            originalData,
+         }}
       >
          {children}
       </FileUploadContext.Provider>

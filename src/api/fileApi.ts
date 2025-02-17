@@ -3,6 +3,7 @@ import api from ".";
 export interface UploadFileResponse {
    data: {
       text: string;
+      originalText: string;
    };
    successful: boolean;
    error: {
