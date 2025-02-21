@@ -20,3 +20,7 @@
 .prose h2 {
   @apply block text-xl mt-3 mb-3 font-bold;
 }
+
+.prose hr {
+  @apply my-3 ;
+}
