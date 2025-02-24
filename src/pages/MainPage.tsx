@@ -25,12 +25,12 @@ const MainPage = () => {
             <FileHistory />
          </div>
          <div className="flex flex-col p-8 gap-y-5 overflow-hidden">
-            <p className="text-[#434343] font-bold text-xl underline">Output</p>
+            <p className="text-[#434343] font-bold text-xl underline">Original Data</p>
             <div className="flex-grow overflow-auto h-full">
                <OutputComponent />
             </div>
             <p className="text-[#434343] font-bold text-xl underline">
-               Original Data
+               Cleaned Data
             </p>
             <div className="flex-grow overflow-auto h-full">
                <OriginalDataComponent />
